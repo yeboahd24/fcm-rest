@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from utils.MakeMessage import send_push_notification
 from .models import Message, Fcm
-
+from utils.fcm import FCMManager
 
 class SendMessageSerializer(serializers.ModelSerializer):
     class Meta:
@@ -11,7 +11,8 @@ class SendMessageSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         current_user = self.context['request'].user
         instance = Message.objects.create(user_id=current_user.id, **validated_data)
-        send_push_notification('Welcome', 'Your registration done successfuly.', current_user )
+        FCMManager.send_push_to_topic(title=instance.title, msg=instance.body, topic='general')
+        # send_push_notification('Welcome', 'Your registration done successfuly.', current_user )
         return instance
 
 

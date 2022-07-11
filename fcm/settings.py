@@ -130,3 +130,8 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'main.CustomUser'
+
+
+# FCM_CREDENTIALS = os.path.abspath(os.path.dirname(__file__)) + "utils/fcm-project-certification.json"
+#pythonic way
+FCM_CREDENTIALS = BASE_DIR / 'utils/fcm-project-certification.json'
